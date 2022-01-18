@@ -14,8 +14,8 @@ router.get('/', async function (req, res) {
 
 router.post('/', async function (req, res) {
   try {
-    const { topic, score, outOf } = req.body
-    const response = await createScores(topic, score, outOf)
+    const { topic, score, outOf, percentage } = req.body
+    const response = await createScores(topic, score, outOf, percentage)
     res.json({ message: 'We created a new score', payload: response })
   } catch (error) {
     console.error(error.message)

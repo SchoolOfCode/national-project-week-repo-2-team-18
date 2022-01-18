@@ -3,6 +3,7 @@ import query from '../connection.js'
 const topic ='react'
 const score = 87;
 const outOf = 100
+const percentage = 87
 
 
 async function populateScoreTable(){

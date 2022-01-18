@@ -7,8 +7,8 @@ export async function getScores() {
 
 export async function createScores(topic, score, outOf) {
   const scores = await query(
-    'INSERT INTO scores ( topic,score, outOf) VALUES ($1, $2, $3) RETURNING topic, score, outOf ',
-    [topic, score, outOf]
+    'INSERT INTO scores ( topic,score, outOf, percentage) VALUES ($1, $2, $3) RETURNING topic, score, outOf, percentage ',
+    [topic, score, outOf, percentage]
   )
   return scores.rows
 }
