@@ -16,7 +16,9 @@
     "express": "~4.16.1",
     "morgan": "~1.9.1",
     "pg": "^8.7.1"
-  },
+  }, "engines": {
+    "node": "16.13.1"
+    },
   "devDependencies": {
     "dotenv": "^14.2.0",
     "nodemon": "^2.0.15"
