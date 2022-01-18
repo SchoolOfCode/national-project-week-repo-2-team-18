@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node ./bin/www.js",
-    "dev": "nodemon ./bin/www.js",
+    "dev": "nodemon -r dotenv/config ./bin/www.js",
     "dbcreatetable": " node ./db/scripts/createUsersTable.js",
     "dbpopulatetable": "node ./db/scripts/populateUsersTable.js"
   },
@@ -14,9 +14,11 @@
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.1",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "pg": "^8.7.1"
   },
   "devDependencies": {
+    "dotenv": "^14.2.0",
     "nodemon": "^2.0.15"
   }
 }

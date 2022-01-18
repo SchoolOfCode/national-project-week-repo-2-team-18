@@ -1,0 +1,19 @@
+import query from '../db/connection.js'
+
+export async function getScores() {
+  const scores = await query('SELECT * FROM scores;')
+  return scores.rows
+}
+
+export async function createScores(topic, score, outOf) {
+  const scores = await query(
+    'INSERT INTO scores ( topic,score, outOf) VALUES ($1, $2, $3) RETURNING topic, score, outOf ',
+    [topic, score, outOf]
+  )
+  return scores.rows
+}
+
+export async function deleteScores(id) {
+  const scores = await query('DELETE FROM scores WHERE id = $1;', [id])
+  return scores.rows
+}
