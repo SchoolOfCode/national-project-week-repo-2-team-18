@@ -14,7 +14,13 @@ router.get('/', async function (req, res) {
 
 router.post('/', async function (req, res) {
   const { topic, score, outOf, percentage } = req.body
-  if(topic !== "" && !isNaN(score) && !isNaN(outOf) && !isNaN(percentage)){
+  if(topic !== '' &&
+  !isNaN(score) &&
+  score !== '' &&
+  !isNaN(outOf) &&
+  outOf !== '' &&
+  !isNaN(percentage) &&
+  percentage !== '' && score < outOf){
     try {
       const response = await createScores(topic, score, outOf, percentage)
       res.json({ message: 'We created a new score', payload: response })
@@ -23,7 +29,7 @@ router.post('/', async function (req, res) {
     }
   }else {
   res.json({
-    message: 'Try again with the correct values!'
+    message: 'Try again with the correct data' 
   })
 }
   
@@ -42,7 +48,7 @@ router.delete('/:id', async function (req, res) {
 
   }else {
     res.json({
-      message: `Please provide a number for the ${id}`
+      message: `Please insert a correct id` 
     })
   }
   
