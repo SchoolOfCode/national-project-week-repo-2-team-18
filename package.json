@@ -7,7 +7,8 @@
     "start": "node ./bin/www.js",
     "dev": "nodemon -r dotenv/config ./bin/www.js",
     "dbcreatetable": " node  -r dotenv/config ./db/scripts/createUsersTable.js",
-    "dbpopulatetable": "node -r dotenv/config ./db/scripts/populateUsersTable.js"
+    "dbpopulatetable": "node -r dotenv/config ./db/scripts/populateUsersTable.js",
+    "test": "node -r dotenv/config --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -16,11 +17,14 @@
     "express": "~4.16.1",
     "morgan": "~1.9.1",
     "pg": "^8.7.1"
-  }, "engines": {
+  },
+  "engines": {
     "node": "16.13.1"
-    },
+  },
   "devDependencies": {
     "dotenv": "^14.2.0",
-    "nodemon": "^2.0.15"
+    "jest": "^27.4.7",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }

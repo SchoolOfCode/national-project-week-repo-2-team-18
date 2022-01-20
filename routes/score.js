@@ -13,22 +13,38 @@ router.get('/', async function (req, res) {
 })
 
 router.post('/', async function (req, res) {
-  try {
-    const { topic, score, outOf, percentage } = req.body
-    const response = await createScores(topic, score, outOf, percentage)
-    res.json({ message: 'We created a new score', payload: response })
-  } catch (error) {
-    console.error(error.message)
+  const { topic, score, outOf, percentage } = req.body
+  if (
+    topic !== '' &&
+    !isNaN(score) &&
+    score !== '' &&
+    !isNaN(outOf) &&
+    outOf !== '' &&
+    !isNaN(percentage) &&
+    percentage !== ''
+  ) {
+    try {
+      const response = await createScores(topic, score, outOf, percentage)
+      res.json({ message: 'We created a new score', payload: response })
+    } catch (error) {
+      console.error(error.message)
+    }
+  } else {
+    res.json({ message: 'Try again with the correct data' })
   }
 })
 
 router.delete('/:id', async function (req, res) {
-  try {
-    const { id } = req.params
-    const response = await deleteScores(id)
-    res.json({ message: 'We deleted your score', payload: response })
-  } catch (error) {
-    console.error(error.message)
+  const { id } = req.params
+  if (!isNaN(id)) {
+    try {
+      const response = await deleteScores(id)
+      res.json({ message: 'We deleted your score', payload: response })
+    } catch (error) {
+      console.error(error.message)
+    }
+  } else {
+    res.json({ message: `Please insert a correct id` })
   }
 })
 
