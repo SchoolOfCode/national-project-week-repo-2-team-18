@@ -1,7 +1,7 @@
 import app from '../server/app.js'
 import request from 'supertest'
 
-describe('score routes', function () {
+describe('testing scores routes', function () {
   //TEST GETTING ALL SCORES//
   test('api should return object with the scores', async function () {
     await request(app)
