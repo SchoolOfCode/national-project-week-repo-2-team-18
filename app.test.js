@@ -53,12 +53,6 @@ describe('testing scores routes', function () {
   test('api should return an error message', async function () {
     await request(app)
       .delete('/scores/test')
-      //   .send({
-      //     topic: 'test',
-      //     score: 2,
-      //     outOf: 10,
-      //     percentage: 'test',
-      //   })
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
       .expect(200)
