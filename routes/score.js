@@ -16,9 +16,8 @@ router.post('/', async function (req, res) {
   const { topic, score, outOf, percentage } = req.body
   if (
     topic !== '' &&
-    !isNaN(score) &&
     score !== '' &&
-    !isNaN(outOf) &&
+    !isNaN(score) &&
     outOf !== '' &&
     !isNaN(percentage) &&
     percentage !== ''
