@@ -13,8 +13,9 @@ router.get('/', async function (req, res) {
 })
 
 router.post('/', async function (req, res) {
-  const { topic, score, outOf, percentage } = req.body
-  if (topic !== '' && !isNaN(score) && !isNaN(percentage) && !isNaN(outOf)) {
+  const percentage = 0
+  const { topic, score, outOf } = req.body
+  if (topic !== '' && !isNaN(score) && !isNaN(outOf)) {
     try {
       const response = await createScores(topic, score, outOf, percentage)
       res.json({ message: 'We created a new score', payload: response })
