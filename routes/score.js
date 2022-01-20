@@ -23,11 +23,13 @@ router.post('/', async function (req, res) {
     !isNaN(percentage) &&
     percentage !== ''
   ) {
-    try {
-      const response = await createScores(topic, score, outOf, percentage)
-      res.json({ message: 'We created a new score', payload: response })
-    } catch (error) {
-      console.error(error.message)
+    if (score < outOf) {
+      try {
+        const response = await createScores(topic, score, outOf, percentage)
+        res.json({ message: 'We created a new score', payload: response })
+      } catch (error) {
+        console.error(error.message)
+      }
     }
   } else {
     res.json({ message: 'Try again with the correct data' })
