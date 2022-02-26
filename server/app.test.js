@@ -2,30 +2,6 @@ import request from 'supertest'
 import app from './app.js'
 
 describe("scores", function () {
-  //TEST GETTING ALL SCORES//
-  test('api should return object with the scores', async function () {
-    await request(app)
-      .get('/scores')
-      .expect(200)
-      .expect('Content-Type', /json/)
-      .expect(function (res) {
-        const expected = [
-          {
-            date: '2022-01-20T11:04:59.424Z',
-            id: 82,
-            outof: 10,
-            percentage: 5,
-            score: 2,
-            topic: 'test',
-          },
-        ]
-        const actual = res.body
-        expect(actual).toEqual({
-          message: 'We are sending the scores',
-          payload: expect.arrayContaining(expected),
-        })
-      })
-  })
   //   TEST INSERT NEW SCORE WITH ERRORS
   test('api should return a json object with error message', async function () {
     await request(app)

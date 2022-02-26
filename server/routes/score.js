@@ -8,7 +8,7 @@ router.get('/', async function (req, res) {
     const response = await getScores()
     res.json({ message: 'We are sending the scores', payload: response })
   } catch (error) {
-    console.error(error.message)
+    //console.error(error.message)
   }
 })
 
@@ -25,7 +25,7 @@ router.post('/', async function (req, res) {
       const response = await createScores(topic, score, outOf, percentage)
       res.json({ message: 'We created a new score', payload: response })
     } catch (error) {
-      console.error(error.message)
+      //console.error(error.message)
     }
   }else {
   res.json({
@@ -43,7 +43,7 @@ router.delete('/:id', async function (req, res) {
       const response = await deleteScores(id)
       res.json({ message: 'We deleted your score', payload: response })
     } catch (error) {
-      console.error(error.message)
+      //console.error(error.message)
     }
 
   }else {
