@@ -1,67 +1,61 @@
-import app from '../server/app.js'
+import makeApp from './app.js'
 import request from 'supertest'
+import { jest } from '@jest/globals'
 
-describe('testing scores routes', function () {
+const database = {
+  getScores: jest.fn(),
+  createScores: jest.fn(),
+  deleteScores: jest.fn(),
+}
+
+const app = makeApp(database)
+
+describe('testing scores GET route with mock DB', function () {
   //TEST GETTING ALL SCORES//
-  test('api should return object with the scores', async function () {
-    await request(app)
+  it('getScores should be called once', async function () {
+    const response = await request(app)
       .get('/scores')
       .expect(200)
       .expect('Content-Type', /json/)
-      .expect(function (res) {
-        const expected = [
-          {
-            date: '2022-01-20T11:04:59.424Z',
-            id: 82,
-            outof: 10,
-            percentage: 5,
-            score: 2,
-            topic: 'test',
-          },
-        ]
-        const actual = res.body
-        expect(actual).toEqual({
-          message: 'We are sending the scores',
-          payload: expect.arrayContaining(expected),
-        })
-      })
+    expect(database.getScores).toHaveBeenCalledTimes(1) /////here (min 6:53)
   })
+  it('api should return object with message in it', async function () {
+    const response = await request(app).get('/scores')
+    expect(response.body.message).toBeDefined()
+  })
+  it('api should return object with message in it', async function () {
+    const response = await request(app).get('/scores')
+    expect(response.body.message).toBeDefined()
+  })
+})
 
-  //   TEST INSERT NEW SCORE WITH ERRORS
-  test('api should return a json object with error message', async function () {
-    await request(app)
+describe('testing scores POST route with mock DB', function () {
+  //TEST POST REQUEST//
+  it('api should return status 200 & json object', async function () {
+    const response = await request(app)
       .post('/scores')
       .send({
         topic: 'test',
-        score: 2,
-        outOf: 10,
-        percentage: 'test',
+        score: 8,
+        outOf: 13,
       })
-      .set('Content-Type', 'application/json')
-      .set('Accept', 'application/json')
       .expect(200)
       .expect('Content-Type', /json/)
-      .expect(function (res) {
-        const actual = res.body
-        expect(actual).toStrictEqual({
-          message: 'Try again with the correct data',
-        })
-      })
   })
-
-  //   TEST DELETE SCORE WITH ERRORS
-  test('api should return an error message', async function () {
-    await request(app)
-      .delete('/scores/test')
-      .set('Content-Type', 'application/json')
-      .set('Accept', 'application/json')
-      .expect(200)
-      .expect('Content-Type', /json/)
-      .expect(function (res) {
-        const actual = res.body
-        expect(actual).toStrictEqual({
-          message: 'Please insert a correct id',
-        })
+  it('api should return status 400', async function () {
+    const response = await request(app)
+      .post('/scores')
+      .send({
+        topic: 'test',
+        score: 'test',
+        outOf: 13,
       })
+      .expect(400)
+  })
+  it('api should return status 400', async function () {
+    const reqBody = [{ topic: 'test' }, { score: 6 }, { outOf: 13 }, {}]
+    for (const body of reqBody) {
+      const response = await request(app).post('/scores').send(body).expect(400)
+    }
   })
 })

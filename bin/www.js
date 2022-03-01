@@ -6,9 +6,9 @@
 
 import debugLib from 'debug'
 import http from 'http'
-
-import app from '../app.js'
-
+import database from '../models/database.js'
+import makeApp from '../app.js'
+const app = makeApp(database)
 const debug = debugLib('server:server')
 
 /**
